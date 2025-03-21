@@ -18,6 +18,7 @@ def grid():
     line(-200, -67, 200, -67)
     line(-200, 67, 200, 67)
 
+
 # Function to draw the 'X' symbol
 def drawx(x, y):
     """Draw X player."""
@@ -29,6 +30,7 @@ def drawx(x, y):
     line(x + 20, y + 20, x + 113, y + 113)
     line(x + 20, y + 113, x + 113, y + 20)
 
+
 # Function to draw the 'O' symbol
 def drawo(x, y):
     """Draw O player."""
@@ -39,10 +41,12 @@ def drawo(x, y):
     down()
     circle(40)  # Reduce the circle size
 
+
 # Function to round the given value to the nearest grid position
 def floor(value):
     """Round value down to grid with square size 133."""
     return ((value + 200) // 133) * 133 - 200
+
 
 # Dictionary to track the current player state
 state = {'player': 0}
@@ -50,6 +54,7 @@ state = {'player': 0}
 players = [drawx, drawo]
 # Dictionary to track occupied positions
 board = {}
+
 
 # Function to check if a player has won
 def check_winner():
@@ -62,9 +67,9 @@ def check_winner():
         [(-67, 200), (-67, 67), (-67, -67)],  # Middle column
         [(67, 200), (67, 67), (67, -67)],  # Right column
         [(-200, 200), (-67, 67), (67, -67)],  # Diagonal \
-        [(67, 200), (-67, 67), (-200, -67)]  # Diagonal /
+        [(67, 200), (-67, 67), (-200, -67)],  # Diagonal /
     ]
-    
+
     for positions in win_positions:
         if all(pos in board and board[pos] == 0 for pos in positions):
             print("Player X wins!")
@@ -72,33 +77,35 @@ def check_winner():
         if all(pos in board and board[pos] == 1 for pos in positions):
             print("Player O wins!")
             return True
-    
+
     if len(board) == 9:
         print("It's a tie!")
         return True
-    
+
     return False
+
 
 # Function to handle user clicks and place 'X' or 'O'
 def tap(x, y):
     """Draw X or O in tapped square if not already occupied."""
     x = floor(x)
     y = floor(y)
-    
+
     # Check if the position is already taken
-    if (x, y) in board:  
+    if (x, y) in board:
         return  # Do nothing if occupied
-    
+
     player = state['player']
     draw = players[player]
     draw(x, y)
     board[(x, y)] = player  # Mark position as taken
     update()
-    
+
     if check_winner():
         return  # Stop game if someone wins or ties
-    
+
     state['player'] = not player  # Switch player
+
 
 # Set up the game window
 setup(420, 420, 370, 0)
