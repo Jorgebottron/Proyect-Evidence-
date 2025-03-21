@@ -1,6 +1,8 @@
-""""Pacman, classic arcade game.
+"""
+Pacman - A classic arcade game.
 
-Exercises
+The objective of the game is to eat all of the
+dots placed in the maze while avoiding four ghosts.
 
 1. Change the board.
 2. Change the number of ghosts.
@@ -50,7 +52,13 @@ tiles = [
 
 
 def square(x, y):
-    "Draw square using path at (x, y)."
+    """
+    Draw a square at the given (x, y) position using the path object.
+
+    Args:
+        x (int): The x-coordinate of the square's top-left corner.
+        y (int): The y-coordinate of the square's top-left corner.
+    """
     path.up()
     path.goto(x, y)
     path.down()
@@ -64,7 +72,15 @@ def square(x, y):
 
 
 def offset(point):
-    "Return offset of point in tiles."
+    """
+    Calculate the tile offset for a given point.
+
+    Args:
+        point (vector): The point for which the offset is calculated.
+
+    Returns:
+        int: The tile index corresponding to the given point.
+    """
     x = (floor(point.x, 20) + 200) / 20
     y = (180 - floor(point.y, 20)) / 20
     index = int(x + y * 20)
@@ -72,7 +88,15 @@ def offset(point):
 
 
 def valid(point):
-    "Return True if point is valid in tiles."
+    """
+    Check if a point is valid in the current tile layout.
+
+    Args:
+        point (vector): The point to be checked.
+
+    Returns:
+        bool: True if the point is valid, False otherwise.
+    """
     index = offset(point)
 
     if tiles[index] == 0:
@@ -87,7 +111,9 @@ def valid(point):
 
 
 def world():
-    "Draw world using path."
+    """
+    Draw the game world (maze) using the path object.
+    """
     turtle.bgcolor('black')
     path.color('blue')
 
@@ -106,7 +132,12 @@ def world():
 
 
 def move():
-    "Move pacman and all ghosts."
+    """
+    Move pacman and all ghosts, update the game state,
+    and check for collisions.
+
+    The function runs recursively every 100 milliseconds to refresh the screen.
+    """
     writer.undo()
     writer.write(state['score'])
 
@@ -156,7 +187,13 @@ def move():
 
 
 def change(x, y):
-    "Change pacman aim if valid."
+    """
+    Change pacman's direction if the new direction is valid.
+
+    Args:
+        x (int): The x-direction change.
+        y (int): The y-direction change.
+    """
     if valid(pacman + vector(x, y)):
         aim.x = x
         aim.y = y
