@@ -7,9 +7,7 @@ Exercises
 3. How would you detect when someone has won?
 4. How could you create a computer player?
 """
-# Import necessary functions from the turtle module
 from turtle import *
-# Import the line function from freegames module
 from freegames import line
 
 # Function to draw the tic-tac-toe grid
@@ -50,15 +48,25 @@ def floor(value):
 state = {'player': 0}
 # List containing the drawing functions for each player
 players = [drawx, drawo]
+# Dictionary to track occupied positions
+board = {}
 
 # Function to handle user clicks and place 'X' or 'O'
 def tap(x, y):
-    """Draw X or O in tapped square."""
+    """Draw X or O in tapped square if not already occupied."""
     x = floor(x)
     y = floor(y)
+    
+    # Check if the position is already taken
+    if (x, y) in board:  
+        # Do nothing if occupied
+        return  
+    
     player = state['player']
     draw = players[player]
     draw(x, y)
+     # Mark position as taken
+    board[(x, y)] = player 
     update()
     state['player'] = not player
 
