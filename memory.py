@@ -141,7 +141,7 @@ def draw():
 
     turtle.up()
     turtle.goto(-200, 180)
-    turtle.color('white')
+    turtle.color('black')
     turtle.write(f"Pairs found: {pairs_found}", font=('Arial', 16, 'normal'))
 
     if pairs_found == len(tiles) // 2:
