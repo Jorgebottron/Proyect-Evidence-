@@ -24,10 +24,20 @@ import turtle
 
 from freegames import path
 
+# Ask user for board size
+width = int(input("Enter board width: "))
+height = int(input("Enter board height: "))
+
+# Validate input
+if width < 2 or height < 2:
+    print("Invalid board size. Using default 8x8.")
+    width, height = 8, 8
+
 car = path('car.gif')
-tiles = list(range(32)) * 2
+num_tiles = width * height // 2
+tiles = list(range(num_tiles)) * 2
 state = {'mark': None}
-hide = [True] * 64
+hide = [True] * (width * height)
 
 
 def square(x, y):
@@ -60,7 +70,7 @@ def index(x, y):
     Returns:
     int: The index of the tile in the tiles list.
     """
-    return int((x + 200) // 50 + ((y + 200) // 50) * 8)
+    return int((x + 200) // 50 + ((y + 200) // 50) * width)
 
 
 def xy(count):
@@ -73,7 +83,7 @@ def xy(count):
     Returns:
     tuple: A tuple (x, y) representing the top-left coordinate of the tile.
     """
-    return (count % 8) * 50 - 200, (count // 8) * 50 - 200
+    return (count % width) * 50 - 200, (count // width) * 50 - 200
 
 
 def tap(x, y):
@@ -112,7 +122,7 @@ def draw():
     turtle.shape(car)
     turtle.stamp()
 
-    for count in range(64):
+    for count in range(num_tiles * 2):
         if hide[count]:
             x, y = xy(count)
             square(x, y)
