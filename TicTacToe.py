@@ -7,67 +7,64 @@ Exercises
 3. How would you detect when someone has won?
 4. How could you create a computer player?
 """
-from turtle import *
+from turtle import Screen, Turtle
 from freegames import line
 
 # Function to draw the tic-tac-toe grid
 def grid():
-    """Draw tic-tac-toe grid."""
+    """Draw the tic-tac-toe grid."""
     line(-67, 200, -67, -200)
     line(67, 200, 67, -200)
     line(-200, -67, 200, -67)
     line(-200, 67, 200, 67)
 
-
 # Function to draw the 'X' symbol
 def drawx(x, y):
-    """Draw X player."""
-    color('red')  # Set X color to red
-    width(4)  # Set line width
-    up()
-    goto(x + 20, y + 20)  # Adjust position to center
-    down()
+    """Draw the X symbol."""
+    t = Turtle()
+    t.hideturtle()
+    t.color('red')
+    t.width(4)
+    t.up()
+    t.goto(x + 20, y + 20)
+    t.down()
     line(x + 20, y + 20, x + 113, y + 113)
     line(x + 20, y + 113, x + 113, y + 20)
 
-
 # Function to draw the 'O' symbol
 def drawo(x, y):
-    """Draw O player."""
-    color('blue')  # Set O color to blue
-    width(4)  # Set line width
-    up()
-    goto(x + 67, y + 30)  # Adjust position to center
-    down()
-    circle(40)  # Reduce the circle size
-
+    """Draw the O symbol."""
+    t = Turtle()
+    t.hideturtle()
+    t.color('blue')
+    t.width(4)
+    t.up()
+    t.goto(x + 67, y + 30)
+    t.down()
+    t.circle(40)
 
 # Function to round the given value to the nearest grid position
 def floor(value):
-    """Round value down to grid with square size 133."""
+    """Round the value down to the nearest grid position."""
     return ((value + 200) // 133) * 133 - 200
 
 
-# Dictionary to track the current player state
-state = {'player': 0}
-# List containing the drawing functions for each player
-players = [drawx, drawo]
-# Dictionary to track occupied positions
-board = {}
+state = {'player': 0}  # Dictionary to track the current player
+players = [drawx, drawo]  # List of player drawing functions
+board = {}  # Dictionary to store occupied positions
 
 
-# Function to check if a player has won
 def check_winner():
     """Check if there is a winner."""
     win_positions = [
-        [(-200, 200), (-67, 200), (67, 200)],  # Top row
-        [(-200, 67), (-67, 67), (67, 67)],  # Middle row
-        [(-200, -67), (-67, -67), (67, -67)],  # Bottom row
-        [(-200, 200), (-200, 67), (-200, -67)],  # Left column
-        [(-67, 200), (-67, 67), (-67, -67)],  # Middle column
-        [(67, 200), (67, 67), (67, -67)],  # Right column
-        [(-200, 200), (-67, 67), (67, -67)],  # Diagonal \
-        [(67, 200), (-67, 67), (-200, -67)],  # Diagonal /
+        [(-200, 200), (-67, 200), (67, 200)],
+        [(-200, 67), (-67, 67), (67, 67)],
+        [(-200, -67), (-67, -67), (67, -67)],
+        [(-200, 200), (-200, 67), (-200, -67)],
+        [(-67, 200), (-67, 67), (-67, -67)],
+        [(67, 200), (67, 67), (67, -67)],
+        [(-200, 200), (-67, 67), (67, -67)],
+        [(67, 200), (-67, 67), (-200, -67)],
     ]
 
     for positions in win_positions:
@@ -85,36 +82,32 @@ def check_winner():
     return False
 
 
-# Function to handle user clicks and place 'X' or 'O'
 def tap(x, y):
-    """Draw X or O in tapped square if not already occupied."""
+    """Handle user taps and place X or O in the selected square."""
     x = floor(x)
     y = floor(y)
 
-    # Check if the position is already taken
     if (x, y) in board:
-        return  # Do nothing if occupied
+        return
 
     player = state['player']
     draw = players[player]
     draw(x, y)
-    board[(x, y)] = player  # Mark position as taken
-    update()
+    board[(x, y)] = player
 
     if check_winner():
-        return  # Stop game if someone wins or ties
+        return
 
-    state['player'] = not player  # Switch player
-
+    state['player'] = not player
 
 # Set up the game window
-setup(420, 420, 370, 0)
-hideturtle()
-tracer(False)
+screen = Screen()
+screen.setup(420, 420, 370, 0)
+screen.tracer(False)
 # Draw the initial grid
 grid()
-update()
+screen.update()
 # Listen for user clicks to trigger the tap function
-onscreenclick(tap)
+screen.onscreenclick(tap)
 # Keep the game running
-done()
+screen.mainloop()
