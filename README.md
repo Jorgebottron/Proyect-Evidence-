@@ -29,3 +29,4 @@ Evidence of our project for the Tec week of computer tools.
 3. **Check whether a square is already occupied** Where now, if the square is occupied, neither of both players can place any of their symbols on that square.
 4. **Determine when the game is over and indicate who won or if there was a tie** Where the terminal now shows who the winner of the match is. Unfortunately, and due to an error unknown to me, the game doesn't stop when it should, so the board fills up, leaving the matches tied.
 
+Note: please ignore the Tic Tac Toe.py file. I don't know how to remove it. The real file is: TicTacToe.py.
