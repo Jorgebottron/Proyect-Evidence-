@@ -4,11 +4,11 @@ Pacman - A classic arcade game.
 The objective of the game is to eat all of the
 dots placed in the maze while avoiding four ghosts.
 
-1. Change the board.
-2. Change the number of ghosts.
-3. Change where pacman starts.
-4. Make the ghosts faster/slower.
-5. Make the ghosts smarter.
+Excercise (Changes to implement)
+
+1. Change the shape and color of the board.
+2. Change shape and color of the dots.
+3. Make the ghosts faster.
 """
 
 from random import choice
@@ -36,7 +36,7 @@ tiles = [
     0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0,
     0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
     0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
-    0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+    0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
     0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0,
     0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
@@ -114,8 +114,8 @@ def world():
     """
     Draw the game world (maze) using the path object.
     """
-    turtle.bgcolor('black')
-    path.color('blue')
+    turtle.bgcolor('white')
+    path.color('green')
 
     for index in range(len(tiles)):
         tile = tiles[index]
