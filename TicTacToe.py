@@ -96,7 +96,7 @@ def end_game(message):
     print(message)
     state['game_over'] = True
     screen.onscreenclick(None)  # Disable further clicks
-    screen.ontimer(screen.bye, 3000)  # Close the window after 3 seconds
+    screen.ontimer(screen.bye, 5000)  # Close the window after 5 seconds
 
 def tap(x, y):
     """Handle user taps and place X or O in the selected square."""
@@ -120,7 +120,7 @@ def tap(x, y):
     # If the game is not over, it changes of player
     if not state['game_over']:
         state['player'] = not player
-        screen.onscreenclick(None)
+        
 
 
 # Set up the game window
