@@ -1,17 +1,11 @@
 """Tic Tac Toe
 
-Exercises
-
+Exercises:
 1. Give the X and O a different color and width.
 2. What happens when someone taps a taken spot?
 3. How would you detect when someone has won?
 4. How could you create a computer player?
 """
-"""Tic Tac Toe"""
-
-"""Tic Tac Toe"""
-
-"""Tic Tac Toe"""
 
 from turtle import Screen, Turtle
 from freegames import line
@@ -23,6 +17,7 @@ def grid():
     line(67, 200, 67, -200)
     line(-200, -67, 200, -67)
     line(-200, 67, 200, 67)
+
 
 # Function to draw the 'X' symbol
 def drawx(x, y):
@@ -41,6 +36,7 @@ def drawx(x, y):
     t.goto(x + 113, y + 20)
     screen.update()
 
+
 # Function to draw the 'O' symbol
 def drawo(x, y):
     """Draw the O symbol."""
@@ -54,15 +50,18 @@ def drawo(x, y):
     t.circle(40)
     screen.update()
 
+
 # Function to round the given value to the nearest grid position
 def floor(value):
     """Round the value down to the nearest grid position."""
     return ((value + 200) // 133) * 133 - 200
 
+
 # Initial game state
 state = {'player': 0, 'game_over': False}
 players = [drawx, drawo]
 board = {}
+
 
 def check_winner():
     """Check if there is a winner or a tie and end the game."""
@@ -91,6 +90,7 @@ def check_winner():
 
     return False
 
+
 def end_game(message):
     """Stop the game and display the result."""
     print(message)
@@ -98,10 +98,11 @@ def end_game(message):
     screen.onscreenclick(None)  # Disable further clicks
     screen.ontimer(screen.bye, 5000)  # Close the window after 5 seconds
 
+
 def tap(x, y):
     """Handle user taps and place X or O in the selected square."""
-     # Prohibits to continue if the game is over
-    if state['game_over']: 
+    # Prohibits to continue if the game is over
+    if state['game_over']:
         return
 
     x = floor(x)
@@ -117,10 +118,9 @@ def tap(x, y):
 
     check_winner()
 
-    # If the game is not over, it changes of player
+    # If the game is not over, it changes player
     if not state['game_over']:
         state['player'] = not player
-        
 
 
 # Set up the game window
