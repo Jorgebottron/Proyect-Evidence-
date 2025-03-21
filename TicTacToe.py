@@ -9,6 +9,8 @@ Exercises
 """
 """Tic Tac Toe"""
 
+"""Tic Tac Toe"""
+
 from turtle import Screen, Turtle
 from freegames import line
 
@@ -60,7 +62,7 @@ players = [drawx, drawo]  # List of player drawing functions
 board = {}  # Dictionary to store occupied positions
 
 def check_winner():
-    """Check if there is a winner and stop the game."""
+    """Check if there is a winner or a tie and end the game."""
     win_positions = [
         [(-200, 200), (-67, 200), (67, 200)],  # Top row
         [(-200, 67), (-67, 67), (67, 67)],  # Middle row
@@ -80,7 +82,7 @@ def check_winner():
             end_game("Player O wins!")
             return
 
-    if len(board) == 9:
+    if len(board) == 9:  # Only declare tie if board is full
         end_game("It's a tie!")
 
 def end_game(message):
