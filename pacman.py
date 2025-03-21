@@ -110,7 +110,7 @@ def move():
     writer.undo()
     writer.write(state['score'])
 
-    path.clear()
+    turtle.clear()
 
     if valid(pacman + aim):
         pacman.move(aim)
@@ -124,9 +124,9 @@ def move():
         y = 180 - (index // 20) * 20
         square(x, y)
 
-    path.up()
-    path.goto(pacman.x + 10, pacman.y + 10)
-    path.dot(20, 'yellow')
+    turtle.up()
+    turtle.goto(pacman.x + 10, pacman.y + 10)
+    turtle.dot(20, 'yellow')
 
     for point, course in ghosts:
         if valid(point + course):
@@ -142,9 +142,9 @@ def move():
             course.x = plan.x
             course.y = plan.y
 
-        path.up()
-        path.goto(point.x + 10, point.y + 10)
-        path.dot(20, 'red')
+        turtle.up()
+        turtle.goto(point.x + 10, point.y + 10)
+        turtle.dot(20, 'red')
 
     turtle.update()
 
