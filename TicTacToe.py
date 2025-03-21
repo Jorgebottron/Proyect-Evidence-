@@ -46,7 +46,7 @@ def floor(value):
     """Round the value down to the nearest grid position."""
     return ((value + 200) // 133) * 133 - 200
 
-state = {'player': 0}  # Dictionary to track the current player
+state = {'player': 0, 'game_over': False}  # Track current player and game state
 players = [drawx, drawo]  # List of player drawing functions
 board = {}  # Dictionary to store occupied positions
 
@@ -65,20 +65,31 @@ def check_winner():
 
     for positions in win_positions:
         if all(pos in board and board[pos] == 0 for pos in positions):
-            print("Player X wins!")
+            announce_winner("Player X wins!")
             return True
         if all(pos in board and board[pos] == 1 for pos in positions):
-            print("Player O wins!")
+            announce_winner("Player O wins!")
             return True
 
     if len(board) == 9:
-        print("It's a tie!")
+        announce_winner("It's a tie!")
         return True
 
     return False
 
+def announce_winner(message):
+    """Announce the winner and stop the game."""
+    print(message)
+    state['game_over'] = True
+    screen.onscreenclick(None)  # Disable further clicks
+    screen.textinput("Game Over", message)  # Show winner message
+    screen.bye()  # Close the game window
+
 def tap(x, y):
     """Handle user taps and place X or O in the selected square."""
+    if state['game_over']:  # Prevent moves if game is over
+        return
+
     x = floor(x)
     y = floor(y)
 
