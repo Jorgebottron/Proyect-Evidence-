@@ -11,6 +11,8 @@ Exercises
 
 """Tic Tac Toe"""
 
+"""Tic Tac Toe"""
+
 from turtle import Screen, Turtle
 from freegames import line
 
@@ -57,9 +59,10 @@ def floor(value):
     """Round the value down to the nearest grid position."""
     return ((value + 200) // 133) * 133 - 200
 
-state = {'player': 0, 'game_over': False}  # Track current player and game state
-players = [drawx, drawo]  # List of player drawing functions
-board = {}  # Dictionary to store occupied positions
+# Initial game state
+state = {'player': 0, 'game_over': False}
+players = [drawx, drawo]
+board = {}
 
 def check_winner():
     """Check if there is a winner or a tie and end the game."""
@@ -77,17 +80,20 @@ def check_winner():
     for positions in win_positions:
         if all(board.get(pos) == 0 for pos in positions):
             end_game("Player X wins!")
-            return
+            return True
         if all(board.get(pos) == 1 for pos in positions):
             end_game("Player O wins!")
-            return
+            return True
 
     if len(board) == 9:  # Only declare tie if board is full
         end_game("It's a tie!")
+        return True
+
+    return False
 
 def end_game(message):
     """Stop the game and display the result."""
-    print(message)  # Show the winner in the console
+    print(message)
     state['game_over'] = True
     screen.onscreenclick(None)  # Disable further clicks
     screen.ontimer(screen.bye, 3000)  # Close the window after 3 seconds
@@ -100,7 +106,7 @@ def tap(x, y):
     x = floor(x)
     y = floor(y)
 
-    if (x, y) in board:
+    if (x, y) in board:  # Check if the cell is already occupied
         return
 
     player = state['player']
@@ -108,9 +114,8 @@ def tap(x, y):
     draw(x, y)
     board[(x, y)] = player
 
-    check_winner()
-
-    state['player'] = not player
+    if not check_winner():  # Switch player if no winner
+        state['player'] = 1 - player  # Switch between 0 and 1
 
 # Set up the game window
 screen = Screen()
