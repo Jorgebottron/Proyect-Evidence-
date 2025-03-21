@@ -10,6 +10,7 @@ Exercises:
 from turtle import Screen, Turtle
 from freegames import line
 
+
 # Function to draw the tic-tac-toe grid
 def grid():
     """Draw the tic-tac-toe grid."""
