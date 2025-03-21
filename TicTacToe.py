@@ -100,13 +100,14 @@ def end_game(message):
 
 def tap(x, y):
     """Handle user taps and place X or O in the selected square."""
-    if state['game_over']:  # Prevent moves if game is over
+     # Prohibits to continue if the game is over
+    if state['game_over']: 
         return
 
     x = floor(x)
     y = floor(y)
 
-    if (x, y) in board:  # Check if the cell is already occupied
+    if (x, y) in board:
         return
 
     player = state['player']
@@ -114,8 +115,13 @@ def tap(x, y):
     draw(x, y)
     board[(x, y)] = player
 
-    if not check_winner():  # Switch player if no winner
-        state['player'] = 1 - player  # Switch between 0 and 1
+    check_winner()
+
+    # If the game is not over, it changes of player
+    if not state['game_over']:
+        state['player'] = not player
+        screen.onscreenclick(None)
+
 
 # Set up the game window
 screen = Screen()
