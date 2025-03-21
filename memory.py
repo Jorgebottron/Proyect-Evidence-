@@ -139,6 +139,11 @@ def draw():
         turtle.color('black')
         turtle.write(tiles[mark], font=('Arial', 30, 'normal'))
 
+    turtle.up()
+    turtle.goto(-200, 200)
+    turtle.color('black')
+    turtle.write(f"Pairs found: {pairs_found}", font=('Arial', 16, 'normal'))
+
     turtle.update()
     turtle.ontimer(draw, 100)
 
