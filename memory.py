@@ -1,13 +1,23 @@
-"""Memory, puzzle game of number pairs.
+"""
+Memory Game - A simple puzzle game of number pairs.
+
+This game presents a grid of hidden tiles, each containing a number. The goal 
+is to find matching pairs by clicking on the tiles.
+
+Features:
+- Randomized tile positions.
+- Interactive gameplay using turtle graphics.
+- Tiles hide when not matched.
+- Game ends when all tiles are revealed.
 
 Exercises:
-
 1. Count and print how many taps occur.
 2. Decrease the number of tiles to a 4x4 grid.
 3. Detect when all tiles are revealed.
-4. Center single-digit tile.
-5. Use letters instead of tiles.
+4. Center single-digit tile numbers.
+5. Use letters instead of numbers on tiles.
 """
+
 
 import random
 import turtle
@@ -21,7 +31,13 @@ hide = [True] * 64
 
 
 def square(x, y):
-    """Draw white square with black outline at (x, y)."""
+    """
+    Draw a white square with a black outline at the given coordinates.
+
+    Parameters:
+    x (int): The x-coordinate of the square's top-left corner.
+    y (int): The y-coordinate of the square's top-left corner.
+    """
     turtle.up()
     turtle.goto(x, y)
     turtle.down()
@@ -34,17 +50,43 @@ def square(x, y):
 
 
 def index(x, y):
-    """Convert (x, y) coordinates to tiles index."""
+    """
+    Convert (x, y) screen coordinates to the corresponding tile index.
+
+    Parameters:
+    x (int): The x-coordinate of the click.
+    y (int): The y-coordinate of the click.
+
+    Returns:
+    int: The index of the tile in the tiles list.
+    """
     return int((x + 200) // 50 + ((y + 200) // 50) * 8)
 
 
 def xy(count):
-    """Convert tiles count to (x, y) coordinates."""
+    """
+    Convert a tile index into (x, y) screen coordinates.
+
+    Parameters:
+    count (int): The index of the tile in the grid.
+
+    Returns:
+    tuple: A tuple (x, y) representing the top-left coordinate of the tile.
+    """
     return (count % 8) * 50 - 200, (count // 8) * 50 - 200
 
 
 def tap(x, y):
-    """Update mark and hidden tiles based on tap."""
+    """
+    Handle user clicks and update game state.
+
+    This function determines which tile was clicked, checks if it matches 
+    another revealed tile, and updates the game state accordingly.
+
+    Parameters:
+    x (int): The x-coordinate of the tap.
+    y (int): The y-coordinate of the tap.
+    """
     spot = index(x, y)
     mark = state['mark']
 
@@ -57,7 +99,14 @@ def tap(x, y):
 
 
 def draw():
-    """Draw image and tiles."""
+    """
+    Render the game board, including the background and tiles.
+
+    This function clears the screen, draws the background image, and updates 
+    the tiles. If a tile is taped, its number is displayed.
+
+    The function runs recursively every 100 milliseconds to refresh the screen.
+    """
     turtle.clear()
     turtle.goto(0, 0)
     turtle.shape(car)
