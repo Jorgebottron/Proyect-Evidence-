@@ -39,6 +39,7 @@ tiles = list(range(num_tiles)) * 2
 state = {'mark': None}
 hide = [True] * (width * height)
 
+pairs_found = 0
 
 def square(x, y):
     """
@@ -97,6 +98,8 @@ def tap(x, y):
     x (int): The x-coordinate of the tap.
     y (int): The y-coordinate of the tap.
     """
+    global pairs_found
+
     spot = index(x, y)
     mark = state['mark']
 
@@ -106,7 +109,7 @@ def tap(x, y):
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
-
+        pairs_found += 1
 
 def draw():
     """
