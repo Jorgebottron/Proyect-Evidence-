@@ -16,17 +16,28 @@ import turtle
 
 from freegames import floor, vector
 
+# Dictionary to keep track of the score
 state = {'score': 0}
+
+# Turtle objects for drawing path and displaying score
 path = turtle.Turtle(visible=False)
 writer = turtle.Turtle(visible=False)
+
+# Initial movement direction for Pacman
 aim = vector(5, 0)
+
+# Initial position of Pacman
 pacman = vector(-40, -80)
+
+# List of ghosts with their starting positions and movement directions
 ghosts = [
     [vector(-180, 160), vector(8, 0)],
     [vector(-180, -160), vector(0, 8)],
     [vector(100, 160), vector(0, -8)],
     [vector(100, -160), vector(-8, 0)],
 ]
+
+# Tile layout of the maze (0 = empty, 1 = wall, 2 = eaten dot)
 tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
@@ -199,17 +210,24 @@ def change(x, y):
         aim.y = y
 
 
+# Set up the turtle window size and position
 turtle.setup(420, 420, 370, 0)
 turtle.hideturtle()
 turtle.tracer(False)
+
+# Display the initial score
 writer.goto(160, 160)
 writer.color('white')
 writer.write(state['score'])
+
+# Set up the keyboard input handlers
 turtle.listen()
 turtle.onkey(lambda: change(5, 0), 'Right')
 turtle.onkey(lambda: change(-5, 0), 'Left')
 turtle.onkey(lambda: change(0, 5), 'Up')
 turtle.onkey(lambda: change(0, -5), 'Down')
+
+# Start the game
 world()
 move()
 turtle.done()
