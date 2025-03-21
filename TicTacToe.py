@@ -10,6 +10,7 @@ Exercises
 from turtle import Screen, Turtle
 from freegames import line
 
+
 # Function to draw the tic-tac-toe grid
 def grid():
     """Draw the tic-tac-toe grid."""
@@ -17,6 +18,7 @@ def grid():
     line(67, 200, 67, -200)
     line(-200, -67, 200, -67)
     line(-200, 67, 200, 67)
+
 
 # Function to draw the 'X' symbol
 def drawx(x, y):
@@ -31,6 +33,7 @@ def drawx(x, y):
     line(x + 20, y + 20, x + 113, y + 113)
     line(x + 20, y + 113, x + 113, y + 20)
 
+
 # Function to draw the 'O' symbol
 def drawo(x, y):
     """Draw the O symbol."""
@@ -42,6 +45,7 @@ def drawo(x, y):
     t.goto(x + 67, y + 30)
     t.down()
     t.circle(40)
+
 
 # Function to round the given value to the nearest grid position
 def floor(value):
@@ -100,14 +104,18 @@ def tap(x, y):
 
     state['player'] = not player
 
+
 # Set up the game window
 screen = Screen()
 screen.setup(420, 420, 370, 0)
 screen.tracer(False)
+
 # Draw the initial grid
 grid()
 screen.update()
+
 # Listen for user clicks to trigger the tap function
 screen.onscreenclick(tap)
+
 # Keep the game running
 screen.mainloop()
