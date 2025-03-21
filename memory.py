@@ -9,8 +9,8 @@ Exercises:
 5. Use letters instead of tiles.
 """
 
-from random import *
-from turtle import *
+import random
+import turtle
 
 from freegames import path
 
@@ -22,15 +22,15 @@ hide = [True] * 64
 
 def square(x, y):
     """Draw white square with black outline at (x, y)."""
-    up()
-    goto(x, y)
-    down()
-    color('black', 'white')
-    begin_fill()
+    turtle.up()
+    turtle.goto(x, y)
+    turtle.down()
+    turtle.color('black', 'white')
+    turtle.begin_fill()
     for count in range(4):
-        forward(50)
-        left(90)
-    end_fill()
+        turtle.forward(50)
+        turtle.left(90)
+    turtle.end_fill()
 
 
 def index(x, y):
@@ -58,10 +58,10 @@ def tap(x, y):
 
 def draw():
     """Draw image and tiles."""
-    clear()
-    goto(0, 0)
-    shape(car)
-    stamp()
+    turtle.clear()
+    turtle.goto(0, 0)
+    turtle.shape(car)
+    turtle.stamp()
 
     for count in range(64):
         if hide[count]:
@@ -72,20 +72,20 @@ def draw():
 
     if mark is not None and hide[mark]:
         x, y = xy(mark)
-        up()
-        goto(x + 2, y)
-        color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        turtle.up()
+        turtle.goto(x + 2, y)
+        turtle.color('black')
+        turtle.write(tiles[mark], font=('Arial', 30, 'normal'))
 
-    update()
-    ontimer(draw, 100)
+    turtle.update()
+    turtle.ontimer(draw, 100)
 
 
-shuffle(tiles)
-setup(420, 420, 370, 0)
-addshape(car)
-hideturtle()
-tracer(False)
-onscreenclick(tap)
+random.shuffle(tiles)
+turtle.setup(420, 420, 370, 0)
+turtle.addshape(car)
+turtle.hideturtle()
+turtle.tracer(False)
+turtle.onscreenclick(tap)
 draw()
-done()
+turtle.done()
