@@ -51,6 +51,34 @@ players = [drawx, drawo]
 # Dictionary to track occupied positions
 board = {}
 
+# Function to check if a player has won
+def check_winner():
+    """Check if there is a winner."""
+    win_positions = [
+        [(-200, 200), (-67, 200), (67, 200)],  # Top row
+        [(-200, 67), (-67, 67), (67, 67)],  # Middle row
+        [(-200, -67), (-67, -67), (67, -67)],  # Bottom row
+        [(-200, 200), (-200, 67), (-200, -67)],  # Left column
+        [(-67, 200), (-67, 67), (-67, -67)],  # Middle column
+        [(67, 200), (67, 67), (67, -67)],  # Right column
+        [(-200, 200), (-67, 67), (67, -67)],  # Diagonal \
+        [(67, 200), (-67, 67), (-200, -67)]  # Diagonal /
+    ]
+    
+    for positions in win_positions:
+        if all(pos in board and board[pos] == 0 for pos in positions):
+            print("Player X wins!")
+            return True
+        if all(pos in board and board[pos] == 1 for pos in positions):
+            print("Player O wins!")
+            return True
+    
+    if len(board) == 9:
+        print("It's a tie!")
+        return True
+    
+    return False
+
 # Function to handle user clicks and place 'X' or 'O'
 def tap(x, y):
     """Draw X or O in tapped square if not already occupied."""
@@ -59,16 +87,18 @@ def tap(x, y):
     
     # Check if the position is already taken
     if (x, y) in board:  
-        # Do nothing if occupied
-        return  
+        return  # Do nothing if occupied
     
     player = state['player']
     draw = players[player]
     draw(x, y)
-     # Mark position as taken
-    board[(x, y)] = player 
+    board[(x, y)] = player  # Mark position as taken
     update()
-    state['player'] = not player
+    
+    if check_winner():
+        return  # Stop game if someone wins or ties
+    
+    state['player'] = not player  # Switch player
 
 # Set up the game window
 setup(420, 420, 370, 0)
