@@ -146,8 +146,6 @@ def move():
     """
     Move pacman and all ghosts, update the game state,
     and check for collisions.
-
-    The function runs recursively every 100 milliseconds to refresh the screen.
     """
     writer.undo()
     writer.write(state['score'])
@@ -175,10 +173,10 @@ def move():
             point.move(course)
         else:
             options = [
-                vector(5, 0),
-                vector(-5, 0),
-                vector(0, 5),
-                vector(0, -5),
+                vector(8, 0),
+                vector(-8, 0),
+                vector(0, 8),
+                vector(0, -8),
             ]
             plan = choice(options)
             course.x = plan.x
