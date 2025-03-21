@@ -140,9 +140,14 @@ def draw():
         turtle.write(tiles[mark], font=('Arial', 30, 'normal'))
 
     turtle.up()
-    turtle.goto(-200, 200)
-    turtle.color('black')
+    turtle.goto(-200, 180)
+    turtle.color('white')
     turtle.write(f"Pairs found: {pairs_found}", font=('Arial', 16, 'normal'))
+
+    if pairs_found == len(tiles) // 2:
+        turtle.goto(-190, -200)
+        turtle.color('red')
+        turtle.write("Congratulations! You've won!", font=('Arial', 20, 'bold'))
 
     turtle.update()
     turtle.ontimer(draw, 100)
