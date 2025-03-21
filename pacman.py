@@ -215,7 +215,7 @@ turtle.tracer(False)
 
 # Display the initial score
 writer.goto(160, 160)
-writer.color('white')
+writer.color('black')
 writer.write(state['score'])
 
 # Set up the keyboard input handlers
